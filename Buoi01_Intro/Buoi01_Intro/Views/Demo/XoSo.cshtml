@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "XoSo";
+}
+
+<h1>Xổ Số</h1>
+<div>Cú pháp Razor</div>
+@{ 
+    var random = new Random();
+    var danhSachSo = new List<int>();
+    for(int i = 0; i < 6; i++)
+    {
+        danhSachSo.Add(random.Next(1, 55));
+    }
+}
+
+@foreach(var so in danhSachSo)
+{
+    <span class="bg-danger text-white m-1 p-1">@so.ToString("00")</span>
+}
+
+@{
+    var danhSachSinhVien = new Dictionary<string, double>();
+    danhSachSinhVien.Add("1001", 9.9);
+    //danhSachSinhVien.Add("1001", 7.9);
+    danhSachSinhVien["1001"] = 8.9;
+    danhSachSinhVien["1002"] = 2.9;
+    danhSachSinhVien["1003"] = 5.9;
+}
+
+@foreach(var key in danhSachSinhVien.Keys)
+{
+    <div>@key - @danhSachSinhVien[key]</div>
+}
