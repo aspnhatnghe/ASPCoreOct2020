@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo Form</title>
+</head>
+<body>
+    <h2>Đăng ký</h2>
+    <hr />
+    <form action="/Home/XuLyDangKy" name="FormDangKy" method="post" enctype="multipart/form-data">
+        Họ tên: <input type="text" name="HoTen" placeholder="Nhập họ tên" />
+        <br />
+        Mật khẩu: <input type="password" name="MatKhau" /><br />
+        <fieldset>
+            <legend>Giới tính:</legend>
+            <input type="radio" name="GioiTinh" value="0" /> Nữ
+            <input type="radio" name="GioiTinh" value="1" checked="checked" /> Nam
+        </fieldset>
+        Thông tin thêm:
+        <textarea name="ThongTinThem" rows="5"></textarea>
+        <br />
+        Sở thích:
+        <input type="checkbox" value="Ăn" name="SoThich" />Ăn
+        <input type="checkbox" value="Ngủ" name="SoThich" />Ngủ
+        <input type="checkbox" value="Bóng bàn" name="SoThich" />Bóng bàn
+        <input type="checkbox" value="Du lịch" name="SoThich" />Du lịch
+        <input type="checkbox" value="Bóng đá" name="SoThich" />Bóng đá
+        <br />
+        Quê quán:
+        <select name="QueQuan">
+            <option value="HN">Hà Nội</option>
+            <option value="HCM">Hồ Chí Minh</option>
+            <option value="CT">Cần Thơ</option>
+        </select><br />
+        Hình:
+        <input type="file" name="Hinh" /><br />
+        <button>Đăng ký</button>
+        <button type="reset">Nhập lại</button>
+    </form>
+</body>
+</html>
