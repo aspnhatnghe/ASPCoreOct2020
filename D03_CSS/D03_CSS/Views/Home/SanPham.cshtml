@@ -1,0 +1,25 @@
+﻿@model IEnumerable<D03_CSS.Models.HangHoa>
+
+@{
+    ViewData["Title"] = "SanPham";
+}
+<link href="~/HangHoa.css" rel="stylesheet" />
+<h2>Danh sách Sản Phẩm</h2>
+
+@foreach (var hh in Model)
+{
+    <div class="hh-box">
+        <img class="hh-image" src="~/HangHoa/@hh.Hinh" alt="IPhone 12" />
+        @if (hh.HangMoi)
+        {
+            <img class="hh-icon" src="~/images/moi-icon.png" />
+        }
+        <div class="hh-cart">
+            <img src="~/images/Basket.png" />
+            <img src="~/images/Letter.png" />
+            <img src="~/images/favourites.png" />
+        </div>
+        <div class="hh-price">@hh.DonGia.ToString("#,##0") đ</div>
+        <div class="hh-name">@hh.Tenhh</div>
+    </div>
+}
