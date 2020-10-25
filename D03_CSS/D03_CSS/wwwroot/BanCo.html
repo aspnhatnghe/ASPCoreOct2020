@@ -9,6 +9,7 @@
     <button id="btnShow">Show</button>
     <button id="btnHide">Hide</button>
     <button id="btnToggle">Toggle</button>
+    <button id="btnReset">Reset</button>
     <table id="tblBanCo">
         <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
         <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -25,6 +26,9 @@
     </style>
     <script>
         $(document).ready(function () {
+            $("#btnReset").click(function () {
+                $("td").html("");
+            });
             $("#btnShow").click(function () {
                 $("#tblBanCo").show(1500);
             });
@@ -33,6 +37,14 @@
             });
             $("#btnToggle").click(function () {
                 $("#tblBanCo").toggle(1500);
+            });
+
+            var gt = "X";
+            $("td").click(function () {
+                if ($(this).html() == "") {
+                    $(this).html(gt);
+                    gt = (gt == "X") ? "O" : "X";
+                }
             });
         });
     </script>

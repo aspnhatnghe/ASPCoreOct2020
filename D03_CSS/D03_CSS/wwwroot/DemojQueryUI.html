@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <link href="lib/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+    <script src="lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+</head>
+<body>
+    Từ Ngày: <input id="TuNgay" />
+    đến Ngày: <input id="DenNgay" />
+    Ngày sinh: <input id="NgaySinh" />
+    <script>
+        $(document).ready(function () {
+            $("#TuNgay, #DenNgay").datepicker({
+                maxDate: 0,
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true,
+                dayNamesMin: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                monthNamesShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
+            });
+        });
+    </script>
+</body>
+</html>

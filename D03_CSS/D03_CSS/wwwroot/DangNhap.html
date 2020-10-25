@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Đăng nhập</title>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <h2>Đăng nhập</h2>
+    <div>
+        Username: <input id="txtUser" placeholder="username" />
+    </div>
+    <div>
+        Password: <input id="txtPass" type="password" />
+    </div>
+    <button type="button" id="btnLogin">Login</button>
+    <div id="thongbao" style="color:red; font-style:italic;"></div>
+    <script>
+        function checkInputInvalid(element) {
+            if (element.val().length == 0) {
+                $("#thongbao").html('Chưa nhập thông tin');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Chưa nhập thông tin!'
+                });
+                element.focus();
+                return true;
+            }
+            return false;
+        }
+
+        $(document).ready(function () {
+            $("#btnLogin").click(function () {
+                let user = $("#txtUser");
+                let pass = $("#txtPass");
+
+                //nếu button đang check là Logout
+                if ($(this).html() == 'Logout') {
+                    $(this).html('Login');
+                    user.next().remove();
+                    pass.next().remove();
+                    user.show();
+                    pass.show();
+                    user.val('');
+                    pass.val('');
+                    return true;
+                }
+
+                if (checkInputInvalid(user) || checkInputInvalid(pass)) {
+                    return false;
+                }
+                $("#thongbao").html('');
+
+                //giả sử độ dài nhập > 4 ==> Thành công
+                if (user.val().length < 5 || pass.val().length < 5) {
+                    $("#thongbao").html('Sai thông tin đăng nhập');
+                    return false;
+                }
+                $("#thongbao").html('');
+
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Đăng nhập thành công!'
+                });
+
+                //đánh dấu đăng nhập thành công
+                $(this).html('Logout');
+                user.after('<span>' + user.val() + '<span>');
+                pass.after('<span>' + pass.val() + '</span>');
+                user.hide(); pass.hide();
+            });
+        });
+    </script>
+</body>
+</html>
