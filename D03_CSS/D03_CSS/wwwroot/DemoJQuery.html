@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo jQuery</title>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                alert("Xin chào");
+            });
+            $('.A').hover(function () {
+                $(this).css({'color':'red'});
+            });
+
+            $('[type="button"]').click(function () {
+                $(this).hide(1500);
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="password" value="aaa" />
+    <div class="A">DIV A</div>
+    <button>XYZ</button>
+    <button class="A" type="button">Hello</button>
+    <button type="reset">Chào</button>
+    <button type="button">ABC</button>
+</body>
+</html>
