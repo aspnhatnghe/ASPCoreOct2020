@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D05_BootStrap", "D05_BootStrap\D05_BootStrap.csproj", "{06CC0EA6-538B-4D69-AEBF-1669CDD5304C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06CC0EA6-538B-4D69-AEBF-1669CDD5304C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06CC0EA6-538B-4D69-AEBF-1669CDD5304C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06CC0EA6-538B-4D69-AEBF-1669CDD5304C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06CC0EA6-538B-4D69-AEBF-1669CDD5304C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF6BB10B-EF46-485B-B518-B4C1F7078796}
+	EndGlobalSection
+EndGlobal
