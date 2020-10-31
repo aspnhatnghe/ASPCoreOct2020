@@ -7,6 +7,49 @@
 </head>
 <body>
     <div class="container-fluid border-success" style="min-height:600px;">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">Logo</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link 2</a>
+                    </li>
+
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            Dropdown link
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Link 1</a>
+                            <a class="dropdown-item" href="#">Link 2</a>
+                            <a class="dropdown-item" href="#">Link 3</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Việt nam</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">English</a>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+
         <h2>Demo GRID</h2>
         <div class="row">
             <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 bg-primary">A</div>
@@ -21,8 +64,84 @@
             <div class="col bg-primary">.col</div>
             <div class="col bg-success">.col</div>
         </div>
+
+        <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Danh mục
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Laptop</a>
+                <a class="dropdown-item" href="#">Điện thoại</a>
+                <a class="dropdown-item" href="#">Tivi</a>
+            </div>
+        </div>
+
+        <button class="btn btn-dark">dark</button>
+        <button class="btn btn-primary">primary</button>
+        <button class="btn btn-success">success</button>
+        <input class="btn btn-secondary" value="AAAA" />
+        <a class="btn btn-info">Nhất Nghệ</a>
+        <div class="btn btn-success">VNEXPRESS</div>
+
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong> Indicates a successful or positive action.
+        </div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active container" id="home">
+                HOME CONTENT AAAA
+            </div>
+            <div class="tab-pane container" id="menu1">
+                MENU1 CONTENT BLA BLA
+            </div>
+            <div class="tab-pane container" id="menu2">
+                MENU2 CONTENT BLA BLA
+            </div>
+        </div>
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                </tr>
+                <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td>july@example.com</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 </body>
 </html>
