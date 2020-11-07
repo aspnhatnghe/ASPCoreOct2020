@@ -1,0 +1,44 @@
+﻿@model Day07_MVC.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Thông tin Sinh Viên</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Manage" asp-controller="SinhVien">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaSV" class="control-label"></label>
+                <input asp-for="MaSV" class="form-control" />
+                <span asp-validation-for="MaSV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoTen" class="control-label"></label>
+                <input asp-for="HoTen" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diem" class="control-label"></label>
+                <input asp-for="Diem" class="form-control" />
+                <span asp-validation-for="Diem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="XepLoai" class="control-label"></label>
+                <input asp-for="XepLoai" class="form-control" />
+                <span asp-validation-for="XepLoai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="GhiFile" value="Ghi file Text" class="btn btn-primary" />
+                <input type="submit" name="GhiFile" value="Ghi file JSON" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
