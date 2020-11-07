@@ -8,5 +8,11 @@ Install Package
 Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 ```
 Update the project's Startup.ConfigureServices method to include a call to AddRazorRuntimeCompilation.
+```
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+        }
+```
 
 Ref: https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation?view=aspnetcore-3.1&tabs=visual-studio
