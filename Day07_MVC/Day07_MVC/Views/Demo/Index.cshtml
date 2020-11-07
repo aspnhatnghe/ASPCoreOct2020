@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div>@ViewBag.DiaChi</div>
+<div>@ViewBag.HoTen</div>
+<div>@ViewData["HoTen"]</div>
+<div>@ViewData["DienThoai"]</div>
+<div>@ViewBag.DienThoai</div>
+<div>@ViewData["Ngay Sinh"]</div>
+<div>@ViewBag.Ngay Sinh</div>
+@{ 
+    var hh = ViewBag.DienThoai as HangHoa;
+}
+@if(hh != null)
+{
+    <div>@hh.MaHh - @hh.TenHh - @hh.DonGia</div>
+}
