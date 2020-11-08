@@ -77,5 +77,10 @@ namespace Day08_Async_UploadFile.Controllers
             }
             return View("Upload");
         }
+
+        public IActionResult ThemHangHoa()
+        {
+            return View();
+        }
     }
 }
