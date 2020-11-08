@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\HinhAnh\" />
+    <Folder Include="wwwroot\HangHoa\" />
   </ItemGroup>
 
 </Project>

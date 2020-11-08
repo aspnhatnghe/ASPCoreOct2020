@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Day08_Async_UploadFile.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Day08_Async_UploadFile.Controllers
 {
@@ -65,7 +66,7 @@ namespace Day08_Async_UploadFile.Controllers
         {
             if (MyFile != null)
             {
-                foreach(var my_file in MyFile)
+                foreach (var my_file in MyFile)
                 {
                     var fileName = $"{DateTime.Now.Ticks}{my_file.FileName}";
                     var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "HinhAnh", fileName);
@@ -80,6 +81,31 @@ namespace Day08_Async_UploadFile.Controllers
 
         public IActionResult ThemHangHoa()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ThemHangHoa(HangHoa hangHoa, IFormFile Hinh)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Hinh != null)
+                {
+                    var fileName = $"{DateTime.Now.Ticks}{Hinh.FileName}";
+                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "HinhAnh", fileName);
+                    using (var file = new FileStream(fullPath, FileMode.Create))
+                    {
+                        Hinh.CopyTo(file);
+                    }
+                    //update field Hinh
+                    hangHoa.Hinh = fileName;
+
+                    //lưu database/file hangHoa
+                    var jsonContent = JsonConvert.SerializeObject(hangHoa);
+                    var jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "HangHoa", $"{hangHoa.MaHh}.json");
+                    System.IO.File.WriteAllText(jsonPath, jsonContent);
+                }
+            }
             return View();
         }
     }
