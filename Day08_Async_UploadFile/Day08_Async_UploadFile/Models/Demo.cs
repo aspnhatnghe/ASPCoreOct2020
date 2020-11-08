@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Day08_Async_UploadFile.Models
 {
@@ -18,6 +19,21 @@ namespace Day08_Async_UploadFile.Models
         public void Test03()
         {
             Thread.Sleep(3000);
+        }
+
+        public async Task<string> Test01Async()
+        {
+            await Task.Delay(2000);
+            return $"Lucky number: {new Random().Next()}";
+        }
+        public async Task<int> Test02Async()
+        {
+            await Task.Delay(5000);
+            return new Random().Next(100, 1000);
+        }
+        public async Task Test03Async()
+        {
+            await Task.Delay(3000);
         }
     }
 }
