@@ -28,6 +28,20 @@ namespace Day09_Validation.Models
         public string Password { get; set; }
 
         [Display(Name ="Lương")]
+        [Range(0, double.MaxValue, ErrorMessage ="Lương không âm")]
         public double Salary { get; set; }
+
+        [Display(Name ="Nhân viên bán thời gian")]
+        public bool IsPartTime { get; set; }
+
+        //[Phone]
+        [DataType(DataType.PhoneNumber)]
+        public string Phone { get; set; }
+
+        [CreditCard]
+        public string CreditCard { get; set; }
+
+        [MaxLength(255)]
+        public string Description { get; set; }
     }
 }
