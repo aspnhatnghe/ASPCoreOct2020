@@ -6,6 +6,11 @@ namespace Day09_Validation.Controllers
 {
     public class DemoController : Controller
     {
+        public IActionResult DangKy()
+        {
+            return View();
+        }
+
         public IActionResult KiemTraMaNhanVien(string EmployeeId)
         {
             //giả sữ dữ liệu đã/đang có
