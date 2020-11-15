@@ -8,6 +8,16 @@ namespace Day09_Validation.Controllers
 {
     public class DemoController : Controller
     {
+        public IActionResult NoLayout()
+        {
+            return View();
+        }
+
+        public IActionResult Test01()
+        {
+            return View();
+        }
+
         public int SinhMaNgauNghien()
         {
             var random = new Random();

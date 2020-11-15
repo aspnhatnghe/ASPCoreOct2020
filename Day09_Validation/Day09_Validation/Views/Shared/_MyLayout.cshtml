@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <div class="container">
+        <header style="height:100px;" class="bg-primary"></header>
+
+        <div class="row m-0">
+            <aside class="col-3">
+                MENU TRÁI
+                @await Html.PartialAsync("_ChungLoai")
+            </aside>
+            <div class="col-9 bg-info" style="min-height:400px;">
+                @RenderBody()
+            </div>
+        </div>
+        <footer class="text-center bg-success p-2">
+            Bản quyền thuộc về ABC&reg;
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

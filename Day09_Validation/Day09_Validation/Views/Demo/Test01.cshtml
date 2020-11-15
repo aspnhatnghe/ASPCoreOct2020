@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "Test01";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<h1>Test01</h1>
+
+<h2>ABNC</h2>
+
+@await Html.PartialAsync("_ChungLoai")
+
+@section css{
+    <style>
+        .loi {
+            color: red;
+        }
+    </style>
+    <script></script>
+}
