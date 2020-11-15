@@ -87,6 +87,16 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
     <script>
+        //B1: Định nghĩa hàm kiểm tra
+        function LaGmail(value, element) {
+            let pattern = /^[a-z]+(\.[0-9a-z]+)*@@gmail.com$/g;
+
+            return this.optional(element) || pattern.test(value);
+        }
+
+        //B2: Khai báo thuộc tính kiểm tra trong jQuery Validate
+        $.validator.addMethod("gmail", LaGmail, "Không đúng định dạng Gmail");
+
         $(document).ready(function () {
             $("#frmDangKy").validate({
                 rules: {
@@ -96,8 +106,12 @@
                     },
                     HoTen: { required: true },
                     NgaySinh: { date: true },
-                    Email: { required: true },
+                    Email: {
+                        required: true,
+                        gmail: true
+                    },
                     XacNhanEmail: {
+                        gmail: true,
                         equalTo: 'input[name="Email"]'
                     },
                     SoTaiKhoan: {
@@ -112,7 +126,7 @@
                     },
                     HeSo: {
                         digits: true,
-                        min:1
+                        min: 1
                     },
                     ThongTinThem: {
                         maxlength: 255
