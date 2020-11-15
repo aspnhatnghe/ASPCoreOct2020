@@ -25,6 +25,14 @@
             <input name="NgaySinh" class="w-100" />
         </div>
     </div>
+
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Điện thoại</div>
+        <div class="col-8 col-md-9">
+            <input name="SoDienThoai" placeholder="Điện thoại" class="w-100" />
+        </div>
+    </div>
+
     <div class="row m-1">
         <div class="col-4 col-md-3 text-right">Email</div>
         <div class="col-8 col-md-9">
@@ -89,17 +97,34 @@
     <script>
         //B1: Định nghĩa hàm kiểm tra
         function LaGmail(value, element) {
-            let pattern = /^[a-z]+(\.[0-9a-z]+)*@@gmail.com$/g;
+            let pattern = /^[a-z][0-9a-z]*(\.[0-9a-z]+)*@@gmail.com$/g;
 
             return this.optional(element) || pattern.test(value);
         }
 
+        function LaDiDongVietNam(value, element) {
+            // 09[012346789]..., 08[123456789], 07[0123456789]
+            //(a|b|c)
+            var pattern = /^(09[0-46-9][0-9]{7}|08[1-9][0-9]{7}|07[0-9]{8})$/g;
+
+            return this.optional(element) || pattern.test(value);
+
+            //var pattern1 = /^09[0-46-9][0-9]{7}$/g;
+            //var pattern2 = /^08[1-9][0-9]{7}$/g;
+            //var pattern3 = /^07[0-9]{8}$/g;
+            //return this.optional(element) || pattern1.test(value) || pattern2.test(value) || pattern3.test(value);
+        }
+
         //B2: Khai báo thuộc tính kiểm tra trong jQuery Validate
         $.validator.addMethod("gmail", LaGmail, "Không đúng định dạng Gmail");
+        $.validator.addMethod("didongvietnam", LaDiDongVietNam, "Không phải số di động Việt Nam");
 
         $(document).ready(function () {
             $("#frmDangKy").validate({
                 rules: {
+                    SoDienThoai: {
+                        didongvietnam: true
+                    },
                     MaSV: {
                         required: true,
                         minlength: 6
