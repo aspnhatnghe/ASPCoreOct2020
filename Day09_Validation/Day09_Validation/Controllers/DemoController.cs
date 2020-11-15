@@ -8,6 +8,14 @@ namespace Day09_Validation.Controllers
 {
     public class DemoController : Controller
     {
+        public int SinhMaNgauNghien()
+        {
+            var random = new Random();
+            var soNgauNhien = random.Next(1000, 10000);
+
+            HttpContext.Session.SetInt32("MaBaoMat", soNgauNhien);
+            return soNgauNhien;
+        }
         public IActionResult DangKy()
         {
             var random = new Random();

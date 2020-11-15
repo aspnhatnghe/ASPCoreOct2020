@@ -72,7 +72,9 @@
     <div class="row m-1">
         <div class="col-4 col-md-3 text-right">Mã bảo mật</div>
         <div class="col-8 col-md-9">
-            <span class="text-danger font-weight-bold">@ViewBag.SoNgauNhien</span>
+            @using Microsoft.AspNetCore.Http;
+            <span id="spanMaBaoMat" class="text-danger font-weight-bold">@Context.Session.GetInt32("MaBaoMat")</span>
+            <button type="button" class="btn btn-primary" id="TaoMaMoi">Tạo mã mới</button>
             <input name="MaBaoMat" placeholder="Mã bảo mật" class="w-100" />
         </div>
     </div>
@@ -121,6 +123,17 @@
 
 
         $(document).ready(function () {
+
+            $("#TaoMaMoi").click(function () {
+                //gửi ajax lên server sinh mã mõa mới
+                $.ajax({
+                    url: "/Demo/SinhMaNgauNghien",
+                    success: function (data) {
+                        $("#spanMaBaoMat").html(data);
+                    }
+                });
+            });
+
             $("#frmDangKy").validate({
                 rules: {
                     SoDienThoai: {
