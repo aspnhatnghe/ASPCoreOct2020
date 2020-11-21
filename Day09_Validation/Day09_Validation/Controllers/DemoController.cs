@@ -1,13 +1,35 @@
 ﻿using Day09_Validation.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace Day09_Validation.Controllers
 {
     public class DemoController : Controller
     {
+        public string DocChuoiKetNoi()
+        {
+            return ConfigService.GetByKey("ConnectionStrings:MyConnectStr");
+        }
+
+        public IActionResult DocConfig()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("mysettings.json");
+            var config = builder.Build();
+
+            var sosp1Trang = config["SoSanPhamMoiTrang"];
+            var namThanhLap = config["TrungTam:NamThanhLap"];
+            var chuoiKetNoi1 = config["ConnectionStrings:MyConnectStr"];
+            var chuoiKetNoi2 = config.GetConnectionString("MyConnectStr");
+
+            return Content("");
+        }
+
         public IActionResult ProductGrid()
         {
             return View();

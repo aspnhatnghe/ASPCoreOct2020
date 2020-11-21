@@ -1,0 +1,13 @@
+﻿{
+  "ChuoiKetNoi": "Server=.; Database=TenDatabase; User Id=admin; Password=123456",
+  "ConnectionStrings": {
+    "MyConnectStr": "Server=.; Database=TenDatabase; User Id=admin; Password=123456",
+    "Db2ConnectStr": "Server=.; Database=TenDatabase; Integrated Security=True;"
+  },
+  "TrungTam": {
+    "Ten": "Nhất Nghệ",
+    "NamThanhLap": 2003
+  },
+  "MaBiMat": "abcgye4m5454",
+  "SoSanPhamMoiTrang": 12
+}
