@@ -8,6 +8,11 @@ namespace Day09_Validation.Controllers
 {
     public class DemoController : Controller
     {
+        public IActionResult ProductGrid()
+        {
+            return View();
+        }
+
         public IActionResult NoLayout()
         {
             return View();
