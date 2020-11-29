@@ -24,13 +24,13 @@ AS BEGIN
 	--Bước 2: Lấy giá trị vừa tăng
 	SELECT @MaLoai = @@IDENTITY
 
-	IF @MoTa IS NOT NULL 
+	IF @MoTa <> ''
 	BEGIN
 		UPDATE Loai SET MoTa = @MoTa
 		WHERE MaLoai = @MaLoai
 	END
 
-	IF @Hinh IS NOT NULL 
+	IF @Hinh <> ''
 	BEGIN
 		UPDATE Loai SET Hinh = @Hinh
 		WHERE MaLoai = @MaLoai

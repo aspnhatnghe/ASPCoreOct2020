@@ -36,8 +36,8 @@ namespace Day13_ADONET.Models
             pa[0] = new SqlParameter("MaLoai", SqlDbType.Int);
             pa[0].Direction = ParameterDirection.Output;
             pa[1] = new SqlParameter("TenLoai", lo.TenLoai);
-            pa[2] = new SqlParameter("MoTa", lo.MoTa);
-            pa[3] = new SqlParameter("Hinh", lo.Hinh);
+            pa[2] = new SqlParameter("MoTa", lo.MoTa ?? "");
+            pa[3] = new SqlParameter("Hinh", lo.Hinh ?? "");
             try
             {
                 DataProvider.ExcuteNonQuery("spThemLoai", CommandType.StoredProcedure, pa);
