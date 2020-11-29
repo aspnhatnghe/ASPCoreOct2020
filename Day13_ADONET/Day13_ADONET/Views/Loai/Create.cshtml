@@ -1,0 +1,41 @@
+﻿@model Day13_ADONET.Models.Loai
+
+@{
+    ViewData["Title"] = "Thêm mới Loại";
+}
+
+<h1>Thêm mới Loại</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>s            
+            <div class="form-group">
+                <label asp-for="TenLoai" class="control-label"></label>
+                <input asp-for="TenLoai" class="form-control" />
+                <span asp-validation-for="TenLoai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hinh" class="control-label"></label>
+                <input name="Hinh" type="file" class="form-control" />
+                <span asp-validation-for="Hinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label"></label>
+                <textarea asp-for="MoTa" class="form-control"></textarea>
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
