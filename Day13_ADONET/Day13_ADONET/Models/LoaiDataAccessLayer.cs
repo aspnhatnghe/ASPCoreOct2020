@@ -56,13 +56,14 @@ namespace Day13_ADONET.Models
                 SqlParameter[] pa = new SqlParameter[4];
                 pa[0] = new SqlParameter("MaLoai", lo.MaLoai);
                 pa[1] = new SqlParameter("TenLoai", lo.TenLoai);
-                pa[2] = new SqlParameter("MoTa", lo.MoTa);
-                pa[3] = new SqlParameter("Hinh", lo.Hinh);
+                pa[2] = new SqlParameter("MoTa", lo.MoTa ?? "");
+                pa[3] = new SqlParameter("Hinh", lo.Hinh  ?? "");
                 DataProvider.ExcuteNonQuery("spSuaLoai", CommandType.StoredProcedure, pa);
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
+                //xử lý lưu Exception
                 return false;
             }
         }

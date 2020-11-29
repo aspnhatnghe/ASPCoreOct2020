@@ -19,10 +19,41 @@ namespace Day13_ADONET.Controllers
             return View(loaiDal.GetAll());
         }
 
-        public IActionResult Update(int id)
+        public IActionResult Edit(int id)
         {
             var loai = loaiDal.GetLoai(id);
-            return View(loai);
+            if (loai != null)
+            {
+                return View(loai);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Loai loai, IFormFile HinhUpdate)
+        {
+            if(id != loai.MaLoai)
+            {
+                return RedirectToAction("Edit", new { id = id });
+            }
+            if(HinhUpdate != null)
+            {
+                var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Hinh", "Loai", HinhUpdate.FileName);
+                using (var file = new FileStream(fullPath, FileMode.Create))
+                {
+                    HinhUpdate.CopyTo(file);
+                }
+                //cập nhật field Hình
+                loai.Hinh = HinhUpdate.FileName;
+            }
+            var result = loaiDal.UpdateLoai(loai);
+            if(result)
+            {
+                return RedirectToAction("Index");
+            }
+            TempData["ThongBao"] = $"Cập nhật loại {id} thất bại";
+            return RedirectToAction("Edit", new { id = id });
         }
 
         #region Tạo mới
@@ -56,5 +87,14 @@ namespace Day13_ADONET.Controllers
             return View();
         }
         #endregion
+
+        public IActionResult Delete(int id)
+        {
+            var result = loaiDal.RemoveLoai(id);
+
+            TempData["ThongBao"] = $"Xóa loại {id} {(result ? "thành công" : "thất bại")}.";
+
+            return RedirectToAction("Index");
+        }
     }
 }
