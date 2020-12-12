@@ -23,5 +23,7 @@ namespace Day15_EFCore.Entities
         
         [ForeignKey("MaLoai")]
         public Loai Loai { get; set; }
+
+        public IEnumerable<ChiTietHoaDon> ChiTietHoaDons { get; set; }
     }
 }
