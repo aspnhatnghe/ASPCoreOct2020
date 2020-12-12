@@ -38,5 +38,28 @@ namespace Day15_EFCore.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var loai = _context.Loais.SingleOrDefault(lo => lo.MaLoai == id);
+            if(loai != null)
+            {
+                return View(loai);
+            }
+            return Redirect("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Loai loai)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(loai);
+                _context.SaveChanges();
+                return Redirect("Index");
+            }
+            return View();
+        }
     }
 }
