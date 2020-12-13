@@ -47,10 +47,66 @@ namespace Day16_EFCore_DBFirst.Controllers
             if (hangHoa != null)
             {
                 ViewBag.MaLoai = new SelectList(_context.Loai, "MaLoai", "TenLoai", hangHoa.MaLoai);
+                ViewBag.MaNcc = new SelectList(_context.NhaCungCap, "MaNcc", "TenCongTy", hangHoa.MaNcc);
                 return View(hangHoa);
             }
             TempData["ThongBao"] = $"Tìm không thấy hàng hóa có mã {id}";
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(HangHoa hangHoa)
+        {
+            if (ModelState.IsValid)
+            {
+                //xử lý upload hình (nếu có)
+
+                _context.Update(hangHoa);
+                await _context.SaveChangesAsync();
+                TempData["ThongBao"] = $"Cập nhật hàng hóa {hangHoa.TenHh} thành công.";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        #endregion
+
+        public IActionResult Delete(int id)
+        {
+            var hangHoa = _context.HangHoa
+                .SingleOrDefault(hh => hh.MaHh == id);
+            var message = string.Empty;
+            if (hangHoa != null)
+            {
+                try
+                {
+                    _context.Remove(hangHoa);
+                    _context.SaveChanges();
+                    message = $"Xóa hàng hóa {hangHoa.TenHh} thành công";
+                }
+                catch
+                {
+                    message = $"Xóa hàng hóa {hangHoa.TenHh} không thành công.";
+                }
+            }
+            else
+            {
+                message = $"Không tìm thấy hàng hóa có mã {id}";
+            }
+            TempData["ThongBao"] = message;
+            return RedirectToAction("Index");
+        }
+
+
+        #region Tim kiếm
+        [HttpGet]
+        public IActionResult TimKiem()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult TimKiem(string TuKhoa, double GiaTu, double GiaDen)
+        {
+            return View();
         }
         #endregion
     }
