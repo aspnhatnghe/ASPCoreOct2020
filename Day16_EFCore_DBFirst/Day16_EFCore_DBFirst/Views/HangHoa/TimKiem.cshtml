@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Day16_EFCore_DBFirst.ViewModels.HangHoaTimKiemVM>
 @{
     ViewData["Title"] = "TimKiem";
 }
@@ -10,4 +10,17 @@
     đến: <input name="GiaDen" type="number" />
     <button>Tìm</button>
 </form>
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MaHh</td>
+            <td>@item.TenHh</td>
+            <td>@item.TenLoai</td>
+            <td>@item.DonGia.Value.ToString("#,##0") đ</td>
+            <td>@item.NgaySx.ToString("dd/MM/yyyy")</td>
+            <td>@(item.GiamGia *100) %</td>
+        </tr>
+    }
+</table>
 

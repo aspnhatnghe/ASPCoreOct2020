@@ -101,12 +101,37 @@ namespace Day16_EFCore_DBFirst.Controllers
         [HttpGet]
         public IActionResult TimKiem()
         {
-            return View();
+            return View(new List<HangHoaTimKiemVM>());
         }
+
         [HttpPost]
-        public IActionResult TimKiem(string TuKhoa, double GiaTu, double GiaDen)
+        public IActionResult TimKiem(string TuKhoa, double? GiaTu, double? GiaDen)
         {
-            return View();
+            var data = _context.HangHoa.AsQueryable();
+            if (!string.IsNullOrEmpty(TuKhoa))
+            {
+                data = data.Where(hh => hh.TenHh.Contains(TuKhoa));
+            }
+            if (GiaTu.HasValue)
+            {
+                data = data.Where(hh => hh.DonGia >= GiaTu);
+            }
+            if (GiaDen.HasValue)
+            {
+                data = data.Where(hh => hh.DonGia <= GiaDen);
+            }
+
+            var dsHangHoa = data.Select(hh => new HangHoaTimKiemVM
+            {
+                MaHh = hh.MaHh,
+                TenHh = hh.TenHh,
+                DonGia = hh.DonGia,
+                GiamGia = hh.GiamGia,
+                Hinh = hh.Hinh,
+                NgaySx = hh.NgaySx,
+                TenLoai = hh.MaLoaiNavigation.TenLoai
+            });
+            return View(dsHangHoa.ToList());
         }
         #endregion
     }
