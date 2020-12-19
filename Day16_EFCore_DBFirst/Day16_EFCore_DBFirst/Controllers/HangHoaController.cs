@@ -183,12 +183,12 @@ namespace Day16_EFCore_DBFirst.Controllers
             //Thống kê doanh thu theo loại
             var data = _context.ChiTietHd
                 .GroupBy(cthd => cthd.MaHhNavigation.MaLoaiNavigation.TenLoai)
-                .Select(g => new
+                .Select(g => new ThongKeLoaiVM
                 {
                     TenLoai = g.Key,
                     DoanhThu = g.Sum(cthd => cthd.SoLuong * cthd.DonGia)
                 });
-            return Json(data);
+            return View(data);
         }
 
         public IActionResult ThongKeLoai()

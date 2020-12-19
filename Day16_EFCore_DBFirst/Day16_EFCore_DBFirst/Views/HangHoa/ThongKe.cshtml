@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Day16_EFCore_DBFirst.ViewModels.ThongKeLoaiVM>
+@{
+    ViewData["Title"] = "ThongKe";
+}
+
+<h1>Thống kê Doanh thu theo Loại</h1>
+
+<canvas id="pie-chart" width="800" height="450"></canvas>
+@{ 
+    var dsLoai = Model.Select(p => p.TenLoai).ToList();
+    var dsLoaiString = string.Join("\", \"", dsLoai);
+    var doanhthuStr = string.Join(", ", Model.Select(p => p.DoanhThu).ToList());
+}
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script>
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ["@Html.Raw(dsLoaiString)"],
+                datasets: [{
+                    label: "Loại",
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cffff"],
+                    data: [@doanhthuStr]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Thống kê Doanh thu theo Loại'
+                }
+            }
+        });
+    </script>
+}
+
+

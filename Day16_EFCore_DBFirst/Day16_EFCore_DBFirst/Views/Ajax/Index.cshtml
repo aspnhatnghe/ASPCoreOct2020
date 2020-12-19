@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div id="clock"></div>
+@section Scripts{ 
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Ajax/ServerTime",
+            type: "POST",
+            success: function (response) {
+                $("#clock").html(response);
+            },
+            error: function (err) {
+                alert(err);
+            }
+        });
+    });
+</script>
+}
