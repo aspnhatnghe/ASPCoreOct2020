@@ -97,6 +97,8 @@ namespace Day16_EFCore_DBFirst.Controllers
         }
 
 
+
+
         #region Tim kiếm
         [HttpGet]
         public IActionResult TimKiem()
@@ -104,8 +106,10 @@ namespace Day16_EFCore_DBFirst.Controllers
             return View(new List<HangHoaTimKiemVM>());
         }
 
+        const int SO_SAN_PHAM_1_TRANG = 5;
+
         [HttpPost]
-        public IActionResult TimKiem(string TuKhoa, double? GiaTu, double? GiaDen)
+        public IActionResult TimKiem(string TuKhoa, double? GiaTu, double? GiaDen, int page = 1)
         {
             var data = _context.HangHoa.AsQueryable();
             if (!string.IsNullOrEmpty(TuKhoa))
@@ -121,18 +125,56 @@ namespace Day16_EFCore_DBFirst.Controllers
                 data = data.Where(hh => hh.DonGia <= GiaDen);
             }
 
-            var dsHangHoa = data.Select(hh => new HangHoaTimKiemVM
-            {
-                MaHh = hh.MaHh,
-                TenHh = hh.TenHh,
-                DonGia = hh.DonGia,
-                GiamGia = hh.GiamGia,
-                Hinh = hh.Hinh,
-                NgaySx = hh.NgaySx,
-                TenLoai = hh.MaLoaiNavigation.TenLoai
-            });
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPage = Math.Ceiling(1.0 * data.Count() / SO_SAN_PHAM_1_TRANG);
+
+            var dsHangHoa = data
+                .Skip((page - 1) * SO_SAN_PHAM_1_TRANG)
+                .Take(SO_SAN_PHAM_1_TRANG)
+                .Select(hh => new HangHoaTimKiemVM
+                {
+                    MaHh = hh.MaHh,
+                    TenHh = hh.TenHh,
+                    DonGia = hh.DonGia,
+                    GiamGia = hh.GiamGia,
+                    Hinh = hh.Hinh,
+                    NgaySx = hh.NgaySx,
+                    TenLoai = hh.MaLoaiNavigation.TenLoai
+                });
             return View(dsHangHoa.ToList());
         }
         #endregion
+
+        public enum Sort
+        {
+            ASC, DESC
+        }
+        public IActionResult SapXepPhanTrang(int page = 1, Sort sort = Sort.ASC)
+        {
+            var dsHangHoa = _context.HangHoa.AsQueryable();
+            if (sort == Sort.ASC)
+            {
+                dsHangHoa = dsHangHoa.OrderBy(p => p.TenHh);
+            }
+            else
+            {
+                dsHangHoa = dsHangHoa.OrderByDescending(p => p.TenHh);
+            }
+
+            var data = dsHangHoa.Skip((page - 1) * SO_SAN_PHAM_1_TRANG)
+                .Take(SO_SAN_PHAM_1_TRANG)
+                .Select(hh => new HangHoaTimKiemVM
+                {
+                    MaHh = hh.MaHh,
+                    TenHh = hh.TenHh,
+                    DonGia = hh.DonGia,
+                    GiamGia = hh.GiamGia,
+                    Hinh = hh.Hinh,
+                    NgaySx = hh.NgaySx,
+                    TenLoai = hh.MaLoaiNavigation.TenLoai
+                });
+            
+            return View(data.ToList());
+        }
     }
 }

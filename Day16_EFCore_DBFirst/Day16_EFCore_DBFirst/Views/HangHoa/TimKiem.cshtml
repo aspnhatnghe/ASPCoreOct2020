@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Day16_EFCore_DBFirst.ViewModels.HangHoaTimKiemVM>
 @{
     ViewData["Title"] = "TimKiem";
+    var index = 0;
 }
 
 <h1>Tìm Kiếm</h1>
@@ -8,12 +9,20 @@
     Tìm theo tên: <input name="TuKhoa" />
     Giá từ: <input name="GiaTu" type="number" />
     đến: <input name="GiaDen" type="number" />
+    <br />
+    @if(ViewBag.TotalPage != null)
+    {
+        <div>Trang: <input name="page" value="@ViewBag.CurrentPage" type="number" /></div>
+    }
     <button>Tìm</button>
+    
 </form>
-<table>
+Trang: @ViewBag.CurrentPage/@ViewBag.TotalPage
+<table class="table">
     @foreach (var item in Model)
     {
         <tr>
+            <td>@(++index)</td>
             <td>@item.MaHh</td>
             <td>@item.TenHh</td>
             <td>@item.TenLoai</td>
