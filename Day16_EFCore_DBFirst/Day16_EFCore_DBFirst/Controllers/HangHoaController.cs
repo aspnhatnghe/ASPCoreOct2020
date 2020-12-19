@@ -173,8 +173,41 @@ namespace Day16_EFCore_DBFirst.Controllers
                     NgaySx = hh.NgaySx,
                     TenLoai = hh.MaLoaiNavigation.TenLoai
                 });
-            
+
             return View(data.ToList());
         }
+
+        #region ThongKe
+        public IActionResult ThongKe()
+        {
+            //Thống kê doanh thu theo loại
+            var data = _context.ChiTietHd
+                .GroupBy(cthd => cthd.MaHhNavigation.MaLoaiNavigation.TenLoai)
+                .Select(g => new
+                {
+                    TenLoai = g.Key,
+                    DoanhThu = g.Sum(cthd => cthd.SoLuong * cthd.DonGia)
+                });
+            return Json(data);
+        }
+
+        public IActionResult ThongKeLoai()
+        {
+            //Thống kê doanh thu theo loại
+            var data = _context.ChiTietHd
+                .GroupBy(cthd => new
+                {
+                    cthd.MaHhNavigation.MaLoaiNavigation.TenLoai,
+                    cthd.MaHhNavigation.MaNccNavigation.TenCongTy
+                })
+                .Select(g => new
+                {
+                    TenLoai = g.Key.TenLoai,
+                    TenCongTy = g.Key.TenCongTy,
+                    DoanhThu = g.Sum(cthd => cthd.SoLuong * cthd.DonGia)
+                });
+            return Json(data);
+        }
+        #endregion
     }
 }
