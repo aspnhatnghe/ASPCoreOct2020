@@ -9,16 +9,19 @@
 @section Scripts{ 
 <script>
     $(document).ready(function () {
-        $.ajax({
-            url: "/Ajax/ServerTime",
-            type: "POST",
-            success: function (response) {
-                $("#clock").html(response);
-            },
-            error: function (err) {
-                alert(err);
-            }
-        });
+        setInterval(function () {
+            $.ajax({
+                url: "/Ajax/ServerTime",
+                type: "POST",
+                success: function (response) {
+                    $("#clock").html(response);
+                },
+                error: function (err, xhr, mess) {
+                    console.log(err);
+                }
+            });
+        }, 1000);
+        
     });
 </script>
 }
