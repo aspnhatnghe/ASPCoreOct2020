@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Day16_EFCore_DBFirst.ViewModels.HangHoaAjaxVM>
+
+@foreach(var item in Model)
+{
+    <div class="col-4">
+        <img src="~/Hinh/HangHoa/@item.Hinh" height="180" />
+        <h2>@item.TenHh</h2>
+        <h4 class="text-danger">@item.DonGia.ToString("#,##0") đ</h4>
+        <button class="btn btn-primary">Mua ngay</button>
+    </div>
+}

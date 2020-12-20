@@ -84,5 +84,29 @@ namespace Day16_EFCore_DBFirst.Controllers
 
             return Json(dsHangHoa);
         }
+
+        public IActionResult LoadMore()
+        {
+            ViewBag.TongSoTrang = Math.Ceiling(1.0 * _context.HangHoa.Count() / SO_SP_1_TRANG);
+            return View();
+        }
+
+        const int SO_SP_1_TRANG = 9;
+
+        [HttpPost]
+        public IActionResult AjaxLoadMore(int page)
+        {
+            var data = _context.HangHoa
+                .Skip((page - 1) * SO_SP_1_TRANG)
+                .Take(SO_SP_1_TRANG)
+                .Select(hh => new HangHoaAjaxVM { 
+                    MaHh = hh.MaHh,
+                    TenHh = hh.TenHh,
+                    DonGia = hh.DonGia.Value,
+                    Hinh = hh.Hinh
+                });
+            
+            return PartialView(data.ToList());
+        }
     }
 }

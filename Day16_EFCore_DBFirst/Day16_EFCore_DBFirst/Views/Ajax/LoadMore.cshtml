@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "LoadMore";
+}
+
+<h1>Load More</h1>
+<div class="hide" id="TongSoTrang">@ViewBag.TongSoTrang</div>
+<div id="KetQua" class="row"></div>
+<div id="LoadMore" class="hide">Tải thêm</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var currentPage = 1;
+            var tongSoTrang = parseInt($("#TongSoTrang").html());
+            function loadMore() {
+                $.ajax({
+                    url: "/Ajax/AjaxLoadMore",
+                    method: "post",
+                    data: {
+                        page: currentPage
+                    },
+                    success: function (data) {
+                        $("#KetQua").append(data);
+                        if (currentPage < tongSoTrang) {
+                            $("#LoadMore").show();
+                        }
+                        else {
+                            $("#LoadMore").hide();
+                        }
+                    }
+                });
+            }
+            $("#LoadMore").click(function () {
+                if (currentPage < tongSoTrang) {
+                    currentPage++;
+                    loadMore();
+                }
+            });
+
+            loadMore();//gọi lần đầu
+        });
+    </script>
+}
+
