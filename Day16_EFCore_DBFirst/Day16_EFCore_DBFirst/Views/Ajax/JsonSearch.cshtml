@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "JsonSearch";
+}
+
+<h1>Json Search</h1>
+<div>
+    Theo tên: <input id="Keyword" /><br />
+    Giá từ: <input id="From" type="number" step="0.01" />
+    đến <input id="To" type="number" step="0.01" />
+    <button id="TimKiem" class="btn btn-info">Tìm kiếm</button>
+</div>
+
+<div id="KetQua">
+    <h2 class="text-center">KẾT QUẢ TÌM KIẾM</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>STT</td>
+                <td>Hàng hóa</td>
+                <td>Giá</td>
+                <td>Loại</td>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#KetQua").hide();
+            $("#TimKiem").click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "/Ajax/JsonSearch",
+                    data: {
+                        Keyword: $("#Keyword").val(),
+                        From: $("#From").val(),
+                        To: $("#To").val()
+                    },
+                    type: "post",
+                    success: function (data) {
+                        $("#tableBody").html("");
+                        $("#KetQua").show();
+
+                        $.each(data, function (index, item) {
+                            let tr = $("<tr/>");
+                            $("<td/>").html(index + 1).appendTo(tr);
+                            $("<td/>").html(item.tenHh).appendTo(tr);
+                            $("<td/>").html(item.donGia).appendTo(tr);
+                            $("<td/>").html(item.tenLoai).appendTo(tr);
+                            $("#tableBody").append(tr);
+                        });
+                    },
+                    error: function () {
+                        alert("Lỗi");
+                    }
+                });
+            });
+        });
+    </script>
+}
