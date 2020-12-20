@@ -1,7 +1,9 @@
 ﻿using Day16_EFCore_DBFirst.Entities;
+using Day16_EFCore_DBFirst.Models;
 using Day16_EFCore_DBFirst.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Day16_EFCore_DBFirst.Controllers
@@ -107,6 +109,36 @@ namespace Day16_EFCore_DBFirst.Controllers
                 });
             
             return PartialView(data.ToList());
+        }
+
+        //Giỏ hàng lưu session mảng các chi tiết hóa đơn
+        public List<CartItem> Carts
+        {
+            get
+            {
+                var value = HttpContext.Session.Get<List<CartItem>>("GioHang");
+                if (value == null)
+                    value = new List<CartItem>();
+                return value;
+            }
+        }
+
+        public IActionResult AddToCart(int id)
+        {
+            var giohang = Carts;
+            var hh = giohang.SingleOrDefault(p => p.MaHh == id);
+            if(hh == null)
+            {
+                hh = new CartItem { MaHh = id, SoLuong = 1 };
+                giohang.Add(hh);
+            }
+            else
+            {
+                hh.SoLuong++;
+            }
+            //update giỏ hàng (session)
+            HttpContext.Session.Set("GioHang", giohang);
+            return Json(giohang);
         }
     }
 }

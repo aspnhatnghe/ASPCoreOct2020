@@ -31,6 +31,10 @@ namespace Day16_EFCore_DBFirst
             {
                 option.UseSqlServer(Configuration.GetConnectionString("MyEstore"));
             });
+
+            services.AddSession(option => {
+                option.IdleTimeout = TimeSpan.FromMinutes(1);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +56,7 @@ namespace Day16_EFCore_DBFirst
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

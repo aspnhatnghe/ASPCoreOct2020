@@ -28,6 +28,19 @@
                         else {
                             $("#LoadMore").hide();
                         }
+
+                        $(".mua-ngay").click(function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                url: "/Ajax/AddToCart",
+                                data: {
+                                    id: $(this).data("mahh")
+                                },
+                                success: function (data) {
+                                    console.log(data);
+                                }
+                            });
+                        });
                     }
                 });
             }
