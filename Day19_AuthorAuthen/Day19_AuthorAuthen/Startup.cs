@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Day19_AuthorAuthen.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,11 +28,18 @@ namespace Day19_AuthorAuthen
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<eStore20Context>(option => {
+            services.AddDbContext<eStore20Context>(option =>
+            {
                 option.UseSqlServer(Configuration.GetConnectionString("MyDatabase"));
             });
 
-
+            //Authentication
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+            {
+                option.LoginPath = "/KhachHang/DangNhap";
+                option.LogoutPath = "/KhachHang/DangXuat";
+                option.AccessDeniedPath = "/Home/AccessDenied";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +59,7 @@ namespace Day19_AuthorAuthen
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
