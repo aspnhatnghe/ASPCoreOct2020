@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Day19_AuthorAuthen.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Day19_AuthorAuthen.Controllers
 {
@@ -32,6 +33,12 @@ namespace Day19_AuthorAuthen.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Authorize]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

@@ -78,5 +78,17 @@ namespace Day19_AuthorAuthen.Controllers
             await HttpContext.SignOutAsync();
             return RedirectToAction("DangNhap");
         }
+
+        [Authorize(Roles ="Admin,KhachHang")]
+        public IActionResult ThongKe()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "KhachHang")]
+        public IActionResult TraCuuDonHang()
+        {
+            return View();
+        }
     }
 }
