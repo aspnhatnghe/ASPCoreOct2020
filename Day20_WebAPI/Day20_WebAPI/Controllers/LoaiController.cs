@@ -1,4 +1,5 @@
 ﻿using Day20_WebAPI.Data;
+using Day20_WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -57,11 +58,22 @@ namespace Day20_WebAPI.Controllers
             {
                 var loai = _context.Update(model);
                 _context.SaveChanges();
-                return this.Ok(loai);
+                //return this.Ok(loai);
+                return Ok(new ApiResult
+                {
+                    Success = true,
+                    Message = "Cập nhật thành công",
+                    Data = loai
+                });
             }
             catch
             {
-                return this.StatusCode(500);
+                //return this.StatusCode(500);
+                return Ok(new ApiResult
+                {
+                    Success = false,
+                    Message = "Cập nhật loại thất bại"
+                });
             }
         }
 
