@@ -31,5 +31,55 @@ namespace Day20_WebAPI.Controllers
                 return Ok(loai);
             return NotFound();
         }
+
+        [HttpPost] //Tạo mới
+        public IActionResult Create(Loai model)
+        {
+            try
+            {
+                var loai = _context.Add(model);
+                _context.SaveChanges();
+                return this.Ok(loai);
+            }
+            catch
+            {
+                return this.StatusCode(500);
+            }
+        }
+
+
+        [HttpPut("{id}")] //Cập nhật
+        public IActionResult UpdateLoai(int id, Loai model)
+        {
+            if (id != model.MaLoai)
+                return this.BadRequest();
+            try
+            {
+                var loai = _context.Update(model);
+                _context.SaveChanges();
+                return this.Ok(loai);
+            }
+            catch
+            {
+                return this.StatusCode(500);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteLoaiAsync(int id)
+        {
+            var loai = await _context.Loai.SingleOrDefaultAsync(p => p.MaLoai == id);
+            if (loai == null) return NotFound();
+            try
+            {
+                _context.Remove(loai);
+                await _context.SaveChangesAsync();
+                return this.Ok();
+            }
+            catch
+            {
+                return this.StatusCode(500);
+            }
+        }
     }
 }
