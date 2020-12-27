@@ -1,5 +1,6 @@
 ﻿using Day20_WebAPI.Data;
 using Day20_WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Day20_WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LoaiController : ControllerBase
     {
         private readonly eStore20Context _context;
@@ -40,7 +42,7 @@ namespace Day20_WebAPI.Controllers
             {
                 var loai = _context.Add(model);
                 _context.SaveChanges();
-                return this.Ok(loai);
+                return this.Ok(loai.Entity);
             }
             catch
             {
@@ -63,7 +65,7 @@ namespace Day20_WebAPI.Controllers
                 {
                     Success = true,
                     Message = "Cập nhật thành công",
-                    Data = loai
+                    Data = loai.Entity
                 });
             }
             catch
