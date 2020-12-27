@@ -49,7 +49,9 @@ namespace Day20_WebAPI
                     
                     //ký vào token
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(secretKeyBytes)
+                    IssuerSigningKey = new SymmetricSecurityKey(secretKeyBytes),
+
+                    ClockSkew = TimeSpan.Zero
                 };
             });
         }
